@@ -13,8 +13,10 @@ node() {
     }
     stage("Read Nexus Values"){
         script{
-        config.version = sh(script: 'grep \"^VERSION\" application-dev.properties | cut -d \"=\" -f 2 | tr -d "\n"| tr -d "\r"| tr -d " "',returnStdout: true)
-           println "\n\n version.id ==> ${config.version}"
+            config.version = sh(script: 'grep \"^VERSION\" application-dev.properties | cut -d \"=\" -f 2 | tr -d "\n"| tr -d "\r"| tr -d " "',returnStdout: true)
+            config.group_id = sh(script: 'grep \"^GROUP_ID\" application-dev.properties | cut -d \"=\" -f 2 | tr -d "\n"| tr -d "\r"| tr -d " "',returnStdout: true)
+            config.artifact_id = sh(script: 'grep \"^ARTIFACT_ID\" application-dev.properties | cut -d \"=\" -f 2 | tr -d "\n"| tr -d "\r"| tr -d " "',returnStdout: true)
+            println "\n\n version.id ==> ${config.version}"
 
            
 }  
