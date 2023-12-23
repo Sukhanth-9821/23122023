@@ -13,8 +13,9 @@ node() {
     }
     stage("Read Nexus Values"){
         script{
-           def properties = readProperties file: './application-dev.properties'
-           def groupId = properties.getProperty('group.id')
+        config.groupId = sh(script: 'grep \"^VERSION\" application-dev.properties | cut -d \"=\" -f 2 | tr -d "\n"| tr -d "\r"| tr -d " "',returnStdout: true)
+           //def properties = readProperties file: './application-dev.properties'
+           def groupId = properties.getProperty('config.groupId')
            def artifactId = properties.getProperty('artifact.id')
            def version = properties.getProperty('version')  
            println "\n\n group.id ==> ${groupId}"
