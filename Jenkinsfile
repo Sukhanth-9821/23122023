@@ -26,5 +26,15 @@ node() {
          "\n\n version.id ==> ${config.version}"+
          "\n\n group_id ==> ${config.group_id}"+
          "\n\n artifact_id ==> ${config.artifact_id}"+
-     "#################"
+     "\n#################"
+     stage("Nexus Push"){
+         if (MasterBranch){
+             def filesByGlob = findFiles(glob: "target/*.war")
+             println "${filesByGlob[0].name} ${filesByGlob[0].path} ${filesByGlob[0].directory} ${filesByGlob[0].length} ${filesByGlob[0].lastModified}"
+             def artifactPath = filesByGlob[0].path
+             println "${artifactPath}"
+             artifactExists = fileExists artifactPath
+             println "${artifactExists}"
+         }
+     }
 }
