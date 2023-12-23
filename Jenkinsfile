@@ -13,14 +13,10 @@ node() {
     }
     stage("Read Nexus Values"){
         script{
-        config.groupId = sh(script: 'grep \"^VERSION\" application-dev.properties | cut -d \"=\" -f 2 | tr -d "\n"| tr -d "\r"| tr -d " "',returnStdout: true)
-           //def properties = readProperties file: './application-dev.properties'
-           def groupId = properties.getProperty('config.groupId')
-           def artifactId = properties.getProperty('artifact.id')
-           def version = properties.getProperty('version')  
-           println "\n\n group.id ==> ${groupId}"
-           println "\n\n artifactId.id ==> ${artifactId}"
-           println "\n\n version.id ==> ${version}"
+        config.version = sh(script: 'grep \"^VERSION\" application-dev.properties | cut -d \"=\" -f 2 | tr -d "\n"| tr -d "\r"| tr -d " "',returnStdout: true)
+           println "\n\n version.id ==> ${config.version}"
+
+           
 }  
     }
     println "\n\n#################"+
