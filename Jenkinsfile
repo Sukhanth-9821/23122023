@@ -13,13 +13,14 @@ node() {
     }
     stage("Read POM"){
         script{
-            def pom = readMavenPom file: 'pom.xml'
+            def pomXml = readFile 'pom.xml'
+            def pom = new XmlSlurper().parseText(pomXml)
             def groupId = pom.getGroupId()
             def artifactId = pom.getArtifactId()
             def version = pom.getVersion()  
             println "\n   groupId ==> ${groupId}"     
-            println "\n   groupId ==> ${artifactId}"  
-            println "\n   groupId ==> ${version}"  
+            println "\n   ArtifactID ==> ${artifactId}"  
+            println "\n   Version ==> ${version}"  
 }
     }
     println "\n\n#################"+
