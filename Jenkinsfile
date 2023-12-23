@@ -11,17 +11,16 @@ node() {
             sh script: "mvn clean install package"
         }
     }
-    stage("Read POM"){
+    stage("Read Nexus Values"){
         script{
-            def pomXml = readFile 'pom.xml'
-            def pom = new XmlSlurper().parseText(pomXml)
-            def groupId = pom.getGroupId()
-            def artifactId = pom.getArtifactId()
-            def version = pom.getVersion()  
-            println "\n   groupId ==> ${groupId}"     
-            println "\n   ArtifactID ==> ${artifactId}"  
-            println "\n   Version ==> ${version}"  
-}
+           def properties = readProperties file: './application-dev.properties'
+           def groupId = properties.getProperty('group.id')
+           def artifactId = properties.getProperty('artifact.id')
+           def version = properties.getProperty('version')  
+           println "\n\n group.id ==> ${groupId}"
+           println "\n\n artifactId.id ==> ${artifactId}"
+           println "\n\n version.id ==> ${version}"
+}  
     }
     println "\n\n#################"+
         "\nImageRegistry==> ${config.imageRegistry}\n"+
