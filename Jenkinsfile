@@ -11,6 +11,17 @@ node() {
             sh script: "mvn clean install package"
         }
     }
+    stage("Read POM"){
+        script{
+            def pom = readMavenPom file: 'pom.xml'
+            def groupId = pom.getGroupId()
+            def artifactId = pom.getArtifactId()
+            def version = pom.getVersion()  
+            println "\n   groupId ==> ${groupId}"     
+            println "\n   groupId ==> ${artifactId}"  
+            println "\n   groupId ==> ${version}"  
+}
+    }
     println "\n\n#################"+
         "\nImageRegistry==> ${config.imageRegistry}\n"+
      "#################"
