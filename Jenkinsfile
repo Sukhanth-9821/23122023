@@ -41,12 +41,12 @@ node() {
                         nexusVersion: 'nexus2',
                         protocol: 'http',
                         nexusUrl: 'http://13.200.252.234:8081/',
-                        groupId: '${config.group_id}',
-                        version: '${config.version}',
+                        groupId: "${config.group_id}",
+                        version: "${config.version}",
                         repository: 'maven-snapshots',
                         credentialsId: 'Nexus_Cred',
                         artifacts: [
-                            artifactId: '${config.artifact_id}',
+                            artifactId: "${config.artifact_id}",
                             type: 'war',
                             classifier: '',
                             file: 'webapp.war'
