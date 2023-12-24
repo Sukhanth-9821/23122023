@@ -45,7 +45,7 @@ node() {
                         version: '${config.version}',
                         repository: 'maven-snapshots',
                         credentialsId: 'Nexus_Cred',
-                        artifact [
+                        artifacts: [
                             artifactId: '${config.artifact_id}',
                             type: 'war',
                             classifier: '',
