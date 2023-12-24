@@ -1,8 +1,3 @@
-@Library('your-shared-library') _
-
-import org.jfrog.hudson.pipeline.Artifactory
-
-
 node() {
     def config = [:]
     config.imageRegistry='12345'
