@@ -51,7 +51,7 @@ node() {
                             classifier: '',
                             file: 'webapp.war'
                         ]
-                      }
+                   )
             }
             
             
