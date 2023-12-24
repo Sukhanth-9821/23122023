@@ -36,9 +36,8 @@ node() {
             //  artifactExists = fileExists artifactPath
             //  println "${artifactExists}"
             withCredentials([usernamePassword(credentialsId: 'Nexus_Cred', usernameVariable: 'NEXUS_USERNAME', passwordVariable: 'NEXUS_PASSWORD')]){
-                freeStyleJob('NexusArtifactUploaderJob') {
-                    steps {
-                    nexusArtifactUploader {
+
+                   nexusArtifactUploader {
                         nexusVersion('nexus2')
                         protocol('http')
                         nexusUrl('http://13.200.252.234:8081/')
@@ -53,9 +52,9 @@ node() {
                             file('webapp.war')
                         }
                       }
-                    }
-                }
             }
+            
+            
          }
      }
 }
