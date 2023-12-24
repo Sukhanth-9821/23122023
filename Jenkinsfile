@@ -35,7 +35,7 @@ node() {
             //  println "${artifactPath}"
             //  artifactExists = fileExists artifactPath
             //  println "${artifactExists}"
-            withCredentials([usernamePassword(credentialsId: 'Nexus_Cred', usernameVariable: 'NEXUS_USERNAME', passwordVariable: 'NEXUS_PASSWORD')]){
+            withCredentials([usernamePassword(credentialsId: 'Nexus_Cred', usernameVariable: 'NEXUS_USERNAME', passwordVariable: 'NEXUS_PASSWORD')])
 
                    nexusArtifactUploader (
                         nexusVersion: 'nexus2',
@@ -51,9 +51,7 @@ node() {
                             classifier: '',
                             file: 'webapp.war'
                         ]
-                   )
-            }
-            
+                   );  
             
          }
      }
