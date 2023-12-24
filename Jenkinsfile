@@ -37,20 +37,20 @@ node() {
             //  println "${artifactExists}"
             withCredentials([usernamePassword(credentialsId: 'Nexus_Cred', usernameVariable: 'NEXUS_USERNAME', passwordVariable: 'NEXUS_PASSWORD')]){
 
-                   nexusArtifactUploader {
-                        nexusVersion('nexus2')
-                        protocol('http')
-                        nexusUrl('http://13.200.252.234:8081/')
-                        groupId('${config.group_id}')
-                        version('${config.version}')
-                        repository('maven-snapshots')
-                        credentialsId('Nexus_Cred')
-                        artifact {
-                            artifactId('${config.artifact_id}')
-                            type('war')
-                            classifier('debug')
-                            file('webapp.war')
-                        }
+                   nexusArtifactUploader (
+                        nexusVersion: 'nexus2',
+                        protocol: 'http',
+                        nexusUrl: 'http://13.200.252.234:8081/',
+                        groupId: '${config.group_id}',
+                        version: '${config.version}',
+                        repository: 'maven-snapshots',
+                        credentialsId: 'Nexus_Cred',
+                        artifact [
+                            artifactId: '${config.artifact_id}',
+                            type: 'war',
+                            classifier: '',
+                            file: 'webapp.war'
+                        ]
                       }
             }
             
