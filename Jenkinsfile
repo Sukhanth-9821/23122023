@@ -35,7 +35,7 @@ node() {
 
                // Nexus Repository credentials
                 NEXUS_USERNAME="sukhanth"
-                NEXUS_PASSWORD=India@#123"
+                NEXUS_PASSWORD="India@#123"
 
                 // Path to the WAR file
                 WAR_FILE_PATH="/webapp/target/webapp.war"
