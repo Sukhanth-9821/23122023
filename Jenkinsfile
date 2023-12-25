@@ -53,7 +53,7 @@ node() {
                 DEPLOY_URL="${NEXUS_URL}${DEPLOY_ENDPOINT}"
 
                // Deploying the WAR file to Nexus Repository
-                curl -v -u "${NEXUS_USERNAME}:${NEXUS_PASSWORD}" --upload-file "${WAR_FILE_PATH}" \
+                curl -v -u '${NEXUS_USERNAME}:${NEXUS_PASSWORD}' --upload-file "${WAR_FILE_PATH}" \
                 "${DEPLOY_URL}&maven.groupId=${GROUP_ID}&maven.artifactId=${ARTIFACT_ID}&maven.version=${VERSION}&maven.asset1.extension=${PACKAGING}"
 
                // Check the HTTP response to ensure successful deployment
