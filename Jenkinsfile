@@ -29,29 +29,40 @@ node() {
      "\n#################"
      stage("Nexus Push"){
          if (MasterBranch){
-            //  def filesByGlob = findFiles(glob: "target/*.war")
-            //  println "${filesByGlob[0].name} ${filesByGlob[0].path} ${filesByGlob[0].directory} ${filesByGlob[0].length} ${filesByGlob[0].lastModified}"
-            //  def artifactPath = filesByGlob[0].path
-            //  println "${artifactPath}"
-            //  artifactExists = fileExists artifactPath
-            //  println "${artifactExists}"
-            
+           script{
+              // Nexus Repository Manager URL
+                NEXUS_URL="http://13.200.252.234:8081/repository/Project-Production/"
 
-                   nexusArtifactUploader (
-                        nexusVersion: 'nexus2',
-                        protocol: 'http',
-                        nexusUrl: 'http://13.200.252.234:8081/',
-                        groupId: "${config.group_id}",
-                        version: "${config.version}",
-                        repository: 'maven-snapshots',
-                        credentialsId: 'Nexus_Cred',
-                        artifacts: [
-                            artifactId: "${config.artifact_id}",
-                            type: 'war',
-                            classifier: '',
-                            file: 'webapp.war'
-                        ]
-                   )  
+               // Nexus Repository credentials
+                NEXUS_USERNAME="sukhanth"
+                NEXUS_PASSWORD=India@#123"
+
+                // Path to the WAR file
+                WAR_FILE_PATH="/webapp/target/webapp.war"
+
+                // Artifact group, artifact id, version, and packaging
+                GROUP_ID="${config.group_id}"
+                ARTIFACT_ID="${config.artifact_id}"
+                VERSION="${config.version}"
+                PACKAGING="war"
+
+                // Nexus Repository endpoint for deploying artifacts
+                DEPLOY_ENDPOINT="/service/rest/v1/components?repository=Project-Production"
+
+                // Constructing the URL for deployment
+                DEPLOY_URL="${NEXUS_URL}${DEPLOY_ENDPOINT}"
+
+               // Deploying the WAR file to Nexus Repository
+                curl -v -u "${NEXUS_USERNAME}:${NEXUS_PASSWORD}" --upload-file "${WAR_FILE_PATH}" \
+                "${DEPLOY_URL}&maven.groupId=${GROUP_ID}&maven.artifactId=${ARTIFACT_ID}&maven.version=${VERSION}&maven.asset1.extension=${PACKAGING}"
+
+               // Check the HTTP response to ensure successful deployment
+               // You can add additional error handling based on the response status
+
+
+           }
+
+                   
             
          }
      }
